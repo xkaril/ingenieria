@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfermedades del Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f3f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            font-size: 18px;
+            text-decoration: none;
+            color: #555;
+            display: block;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #008cba;
+        }
+
+        .diseases-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .disease {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .disease:hover {
+            transform: translateY(-5px);
+        }
+
+        .disease h3 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #008cba;
+            margin-bottom: 10px;
+        }
+
+        .disease p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .simulation-button {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .simulation-button:hover {
+            background-color: #005f6b;
+        }
+
+        .tratamiento {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .tratamiento:hover {
+            transform: translateY(-5px);
+        }
+
+        .tratamiento h4 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #008cba;
+            margin-bottom: 10px;
+        }
+
+        .tratamiento p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tratamiento span {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <a href="3.Pacientes.html" class="back-link">&#8592; Volver al Perfil del Paciente</a>
+    <div class="container">
+        <h2 style="text-align: center; color: #008cba;">Enfermedades del Paciente</h2>
+        <div class="diseases-container">
+            <div class="disease">
+                <h3>Enfermedad 1</h3>
+                <p>Descripción de la enfermedad 1.</p>
+                <button class="simulation-button" onclick="simularTratamiento('Enfermedad 1')">Simular Tratamiento</button>
+            </div>
+            <div class="disease">
+                <h3>Enfermedad 2</h3>
+                <p>Descripción de la enfermedad 2.</p>
+                <button class="simulation-button" onclick="simularTratamiento('Enfermedad 2')">Simular Tratamiento</button>
+            </div>
+            <!-- Agrega más enfermedades aquí según sea necesario -->
+        </div>
+    </div>
+
+    <div id="tratamientos-container" class="container"></div>
+
+    <script>
+        // Variable para almacenar los tratamientos
+        let tratamientosActuales = [];
+
+        // Función para simular un tratamiento para una enfermedad específica
+        function simularTratamiento(enfermedad) {
+            // Generar los tratamientos para la enfermedad
+            let nuevosTratamientos = generarTratamientos(enfermedad);
+            if (nuevosTratamientos && nuevosTratamientos.length > 0) {
+                // Actualizar los tratamientos actuales
+                tratamientosActuales = nuevosTratamientos;
+                // Mostrar los tratamientos en la página
+                mostrarTratamientos();
+            } else {
+                alert(`No se encontraron tratamientos para ${enfermedad}.`);
+            }
+        }
+
+        // Función para generar tratamientos simulados para una enfermedad específica
+        function generarTratamientos(enfermedad) {
+            switch (enfermedad) {
+                case 'Enfermedad 1':
+                    return [
+                        { nombre: 'Tratamiento A', medicacion: 'Medicación A', tipo: 'Tratamiento farmacológico', tiempo: '2 semanas', eficiencia: 0.8, descripcion: 'Este tratamiento consiste en tomar la medicación A dos veces al día.' },
+                        { nombre: 'Tratamiento B', medicacion: 'Medicación B', tipo: 'Tratamiento farmacológico', tiempo: '1 semana', eficiencia: 0.6, descripcion: 'Este tratamiento implica tomar la medicación B una vez al día.' },
+                        { nombre: 'Tratamiento C', medicacion: 'Terapia física', tipo: 'Tratamiento no farmacológico', tiempo: '3 semanas', eficiencia: 0.9, descripcion: 'Este tratamiento requiere sesiones de terapia física tres veces por semana.' }
+                    ];
+                case 'Enfermedad 2':
+                    return [
+                        { nombre: 'Tratamiento D', medicacion: 'Medicación D', tipo: 'Tratamiento farmacológico', tiempo: '4 semanas', eficiencia: 0.7, descripcion: 'Este tratamiento consiste en tomar la medicación D una vez al día.' },
+                        { nombre: 'Tratamiento E', medicacion: 'Terapia cognitiva', tipo: 'Tratamiento no farmacológico', tiempo: '2 semanas', eficiencia: 0.85, descripcion: 'Este tratamiento implica sesiones de terapia cognitiva dos veces por semana.' },
+                        { nombre: 'Tratamiento F', medicacion: 'Dieta específica', tipo: 'Tratamiento dietético', tiempo: '5 semanas', eficiencia: 0.95, descripcion: 'Este tratamiento requiere seguir una dieta específica baja en grasas y alta en fibras.' }
+                    ];
+                default:
+                    return null;
+            }
+        }
+
+        // Función para mostrar los tratamientos en la página
+        function mostrarTratamientos() {
+            // Obtener el contenedor de tratamientos
+            const tratamientosContainer = document.getElementById('tratamientos-container');
+            // Limpiar cualquier tratamiento anterior
+            tratamientosContainer.innerHTML = '';
+            // Iterar sobre los tratamientos actuales y agregarlos al contenedor
+            tratamientosActuales.forEach(tratamiento => {
+                const tratamientoDiv = document.createElement('div');
+                tratamientoDiv.classList.add('tratamiento');
+                tratamientoDiv.innerHTML = `
+                    <h4>${tratamiento.nombre}</h4>
+                    <p><span>Tipo:</span> ${tratamiento.tipo}</p>
+                    <p><span>Medicación:</span> ${tratamiento.medicacion}</p>
+                    <p><span>Tiempo:</span> ${tratamiento.tiempo}</p>
+                    <p><span>Eficiencia:</span> ${tratamiento.eficiencia}</p>
+                    <p><span>Descripción:</span> ${tratamiento.descripcion}</p>
+                `;
+                tratamientosContainer.appendChild(tratamientoDiv);
+            });
+        }
+    </script>
+</body>
+</html>
+

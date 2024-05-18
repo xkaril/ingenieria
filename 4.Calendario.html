@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de consultas</title>
+    <link rel="stylesheet" href="calendario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="dark_mode">
+    <a href="2.index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver</a>
+    <div class="header">
+        <h1>Calendario de consultas</h1>
+    </div>
+    <div class="content">
+        <div class="calendar-container">
+            <div class="calendar">
+                <div class="month">
+                    <button id="prevMonth">&lt;</button>
+                    <h2 id="monthYear">Mayo 2024</h2>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="days" id="daysContainer">
+                </div>
+            </div>
+            <div class="modal" id="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Evento del día</h3>
+                    <input type="text" id="eventNameInput" placeholder="Ingrese el nombre del evento">
+                    <input type="text" id="eventTimeInput" placeholder="Ingrese el horario (HH:MM)">
+                    <button id="addEventBtn">Agregar evento</button>
+                </div>
+            </div>
+        </div>
+        <div class="events-container">
+            <h2>Eventos</h2>
+            <ul id="eventsList"></ul>
+        </div>
+    </div>
+    
+    <script src="calendario.js"></script>
+    <script src="configuraciones.js"></script>
+</body>
+</html>

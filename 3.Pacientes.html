@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Paciente</title>
+    <link rel="stylesheet" href="paciente.css">
+    <style>
+        /* Estilos adicionales para botones */
+        .profile button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block; /* Para que cada botón esté en una línea */
+            width: 100%; /* Para que los botones ocupen todo el ancho disponible */
+            text-align: center; /* Centrar el texto dentro de los botones */
+        }
+
+        .profile button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilos para el botón de análisis de riesgo */
+        .view-risk-analysis-button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .view-risk-analysis-button:hover {
+            background-color: #005f6b;
+        }
+
+        /* Estilos para el enlace de volver */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: black; /* Cambia el color del texto a negro */
+        }
+
+        .back-link:hover {
+            color: #555;
+        }
+
+        .container {
+            margin-top: 50px; /* Añadir espacio en la parte superior para evitar solapamiento */
+        }
+
+        /* Estilos para el nombre del paciente */
+        .profile p {
+            font-weight: bold; /* Hace que el nombre del paciente se vea en negrita */
+            margin-bottom: 5px; /* Añade espacio debajo del nombre */
+        }
+
+        /* Estilos para la ID del paciente */
+        .profile span {
+            font-size: 0.8em; /* Reduce el tamaño del texto de la ID */
+            color: #888; /* Cambia el color del texto de la ID */
+        }
+    </style>
+</head>
+<body>
+    <a href="2.index.html" class="back-link">&#8592; Volver al inicio</a>
+    <div class="container">
+        <h2>Perfil del Paciente</h2>
+        <div class="profiles-container">
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 1" onclick="mostrarInformacionContacto('Nombre del Familiar 1', '12345678-9', 'Padre', '+56912345678', 'Dirección 123')">
+                <p>Nombre del Paciente 1</p>
+                <span>ID: 12345678-9</span>
+                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
+                <!-- Agrega el botón de seguimiento de tratamientos -->
+                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 1', '12345678-9')">Seguimiento de Tratamientos</button>
+                <button onclick="verEnfermedades()">Ver Enfermedades</button>
+            </div>
+            
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 2" onclick="mostrarInformacionContacto('Nombre del Familiar 2', '98765432-1', 'Madre', '+56998765432', 'Dirección 456')">
+                <p>Nombre del Paciente 2</p>
+                <span>ID: 98765432-1</span>
+                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
+                <!-- Agrega el botón de seguimiento de tratamientos -->
+                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 2', '98765432-1')">Seguimiento de Tratamientos</button>
+                <button onclick="verEnfermedades()">Ver Enfermedades</button>
+            </div>
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 3" onclick="mostrarInformacionContacto('Nombre del Familiar 3', '13579246-8', 'Hermano', '+56913579246', 'Dirección 789')">
+                <p>Nombre del Paciente 3</p>
+                <span>ID: 13579246-8</span>
+                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
+                <!-- Agrega el botón de seguimiento de tratamientos -->
+                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 3', '13579246-8')">Seguimiento de Tratamientos</button>
+                <button onclick="verEnfermedades()">Ver Enfermedades</button>
+            </div>
+        </div>
+        <!-- Botón para el análisis de riesgo -->
+        <button class="view-risk-analysis-button" onclick="redireccionarAnalisisRiesgo()">Análisis de Riesgo</button>
+    </div>
+
+    <script>
+        function mostrarInformacionContacto(nombre, rut, parentezco, telefono, direccion) {
+            var infoContacto = `Nombre: ${nombre}\nRUT: ${rut}\nParentezco: ${parentezco}\nTeléfono: ${telefono}\nDirección: ${direccion}`;
+            alert(infoContacto);
+        }
+
+        function redireccionarAnalisisGenomico() {
+            window.location.href = "analisis_genomico.html";
+        }
+
+        function redireccionarSeguimientoTratamientos(nombre, id) {
+            // Pasa el nombre y la ID del paciente a la página de seguimiento de tratamientos
+            window.location.href = `Seguimiento_tratamientos.html?nombre=${nombre}&id=${id}`;
+        }
+
+        function verEnfermedades() {
+            window.location.href = "enfermedades.html";
+        }
+
+        function redireccionarAnalisisRiesgo() {
+            window.location.href = "analisis_riesgo_genetico.html";
+        }
+    </script>
+
+    <script src="configuraciones.js"></script>
+</body>
+</html>

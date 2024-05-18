@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Riesgo Genético</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative; /* Permite posicionar el enlace */
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            position: absolute; /* Posiciona el enlace */
+            top: 20px; /* Alinea con el borde superior del encabezado */
+            left: 20px; /* Alinea con el borde izquierdo del encabezado */
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .prediction-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .prediction-form h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .prediction-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .prediction-form select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .prediction-form button {
+            margin: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .prediction-form button:hover {
+            background-color: #0056b3;
+        }
+
+        #riskResult {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Análisis de Riesgo Genético</h1>
+            <div class="date">
+                <script>
+                    document.write(new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+                </script>
+            </div>
+        </div>
+    </header>
+    <a href="3.Pacientes.html" onclick="window.history.back();">Volver al Perfil del Paciente</a>
+    <main>
+        <div class="prediction-form">
+            <h2>Predecir Riesgo de Enfermedad Genética</h2>
+            <label for="diseaseSelect">Enfermedad:</label>
+            <select id="diseaseSelect">
+                <option value="Tumor Cerebral">Tumor Cerebral</option>
+                <option value="Cáncer de Pulmón">Cáncer de Pulmón</option>
+                <option value="Leucemia">Leucemia</option>
+                <option value="Cáncer de Mama">Cáncer de Mama</option>
+                <option value="Melanoma">Melanoma</option>
+                <option value="Sarcoma">Sarcoma</option>
+            </select>
+            <button id="predictRiskBtn">Predecir Riesgo</button>
+            <p id="riskResult"></p>
+        </div>
+    </main>
+    <script>
+        const diseases = [
+            {
+                name: 'Tumor Cerebral',
+                type: 'Tumor',
+                description: 'Un tumor cerebral es una masa o crecimiento anormal de tejido en el cerebro o en el área cercana.',
+                riskFactors: ['Radiación', 'Factores genéticos', 'Exposición a químicos']
+            },
+            {
+                name: 'Cáncer de Pulmón',
+                type: 'Cáncer',
+                description: 'El cáncer de pulmón comienza en los pulmones y puede diseminarse a los ganglios linfáticos o a otros órganos en el cuerpo.',
+                riskFactors: ['Tabaquismo', 'Exposición al humo de segunda mano', 'Exposición al radón']
+            },
+            {
+                name: 'Leucemia',
+                type: 'Cáncer',
+                description: 'La leucemia es un cáncer de los glóbulos blancos de la sangre. Se produce en la médula ósea.',
+                riskFactors: ['Radiación', 'Exposición a productos químicos', 'Síndromes genéticos']
+            },
+            {
+                name: 'Cáncer de Mama',
+                type: 'Cáncer',
+                description: 'El cáncer de mama es un tipo de cáncer que se origina en el tejido mamario.',
+                riskFactors: ['Edad avanzada', 'Antecedentes familiares', 'Factores hormonales']
+            },
+            {
+                name: 'Melanoma',
+                type: 'Cáncer',
+                description: 'El melanoma es un tipo de cáncer de piel que se desarrolla a partir de los melanocitos.',
+                riskFactors: ['Exposición a la luz ultravioleta', 'Antecedentes familiares', 'Piel clara']
+            },
+            {
+                name: 'Sarcoma',
+                type: 'Tumor',
+                description: 'Los sarcomas son tumores que se desarrollan en los tejidos conectivos del cuerpo, como músculos, huesos, grasa y vasos sanguíneos.',
+                riskFactors: ['Radiación', 'Genética', 'Lesiones crónicas']
+            }
+        ];
+
+        // Función para predecir el riesgo de enfermedades genéticas
+        function predictGeneticRisk(selectedDisease) {
+            const disease = diseases.find(disease => disease.name === selectedDisease);
+            if (disease) {
+                // Supongamos que la probabilidad de riesgo es un valor aleatorio entre 0 y 1
+                return Math.random().toFixed(2);
+            } else {
+                console.error('La enfermedad seleccionada no tiene factores de riesgo definidos.');
+                return null;
+            }
+        }
+
+        // Evento para manejar la solicitud de predicción de riesgo
+        document.getElementById('predictRiskBtn').addEventListener('click', function() {
+            const selectedDisease = document.getElementById('diseaseSelect').value;
+            if (selectedDisease) {
+                const risk = predictGeneticRisk(selectedDisease);
+                document.getElementById('riskResult').textContent = `La probabilidad de desarrollar ${diseases.find(d => d.name === selectedDisease).type} es: ${risk}`;
+            } else {
+                alert('Por favor, seleccione una enfermedad.');
+            }
+        });
+    </script>
+</body>
+</html>

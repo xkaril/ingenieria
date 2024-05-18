@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento</title>
+    <link rel="stylesheet" href="Seguimiento.css">
+    <style>
+        /* Estilos adicionales para el diseño */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        .vizualizacion {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .vizualizacion label {
+            margin-right: 10px;
+        }
+
+        .resumen {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .resumen button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .resumen button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="3.Pacientes.html" class="volver-btn">&#8592; Volver a Pacientes</a>
+    <div class="container">
+        <h1>Seguimiento de Tratamientos</h1>
+        <form id="seguimiento-form" action="#" method="post">
+            <label for="nombre">Nombre del Paciente:</label>
+            <input type="text" id="nombre" name="nombre" readonly>
+            
+            <label for="id">ID del Paciente:</label>
+            <input type="text" id="id" name="id" readonly>
+
+            <label for="presion">Presión Arterial:</label>
+            <input type="text" id="presion" name="presion">
+
+            <label for="pulso">Pulso:</label>
+            <input type="text" id="pulso" name="pulso">
+
+            <div id="medicamentos-container">
+                <label for="medicamento">Medicamentos Recetados:</label>
+                <div class="medicamento-input">
+                    <input type="text" name="medicamento[]" class="medicamento">
+                    <input type="time" name="hora-medicamento[]" class="hora-medicamento">
+                </div>
+            </div>
+
+            <button type="button" id="agregar-medicamento">Agregar Medicamento</button>
+
+            <label for="otros">Otros Detalles:</label>
+            <textarea id="otros" name="otros"></textarea>
+
+            <label for="examen">Resultados de Examen:</label>
+            <input type="file" id="examen" name="examen[]" multiple>
+            <label for="examen">Nombre del Archivo:</label>
+            <input type="text" id="nombre-archivo" name="nombre-archivo" placeholder="Ingrese el nombre del archivo">
+
+            <button type="button" id="guardar-seguimiento">Guardar</button>
+        </form>
+    </div>
+
+    <div class="vizualizacion">
+        <label for="visualizacion-cantidad">Cantidad:</label>
+        <select id="visualizacion-cantidad">
+            <option value="diario">Diario</option>
+            <option value="semanal">Semanal</option>
+            <option value="mensual">Mensual</option>
+            <option value="anual">Anual</option>
+        </select>
+
+        <div id="fecha-container" style="display: none;">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+        </div>
+
+        <label for="visualizacion">Visualización:</label>
+        <select id="visualizacion">
+            <option value="tabla">Tabla</option>
+            <option value="grafico-puntos">Gráfico de Puntos</option>
+            <option value="grafico-linea">Gráfico de Línea</option>
+            <option value="grafico-barras">Gráfico de Barras</option>
+        </select>
+        <button type="button" id="ver-resumen">Ver Resumen</button>
+    </div>
+
+    <div class="resumen" id="resumen-container">
+    </div>
+
+    <script>
+        function getDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString();
+            return `${date} ${time}`;
+        }
+
+        const seguimientoForm = document.getElementById('seguimiento-form');
+
+        seguimientoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+
+        document.getElementById('guardar-seguimiento').addEventListener('click', function() {
+            const nombre = document.getElementById('nombre').value;
+            const id = document.getElementById('id').value;
+            const presion = document.getElementById('presion').value;
+            const pulso = document.getElementById('pulso').value;
+            const otros = document.getElementById('otros').value;
+            const fechaHora = getDateTime();
+            const examenes = document.getElementById('examen').files;
+            const medicamentos = Array.from(document.querySelectorAll('.medicamento')).map(input => input.value);
+            const horasMedicamentos = Array.from(document.querySelectorAll('.hora-medicamento')).map(input => input.value);
+            const nombreArchivo = document.getElementById('nombre-archivo').value;
+
+            guardarSeguimiento(nombre, id, presion, pulso, otros, fechaHora, examenes, medicamentos, horasMedicamentos, nombreArchivo);
+            seguimientoForm.reset();
+        });
+
+        function guardarSeguimiento(nombre, id, presion, pulso, otros, fechaHora, examenes, medicamentos, horasMedicamentos, nombreArchivo) {
+            const examenesInfo = Array.from(examenes).map(file => file.name).join(', ');
+            const medicamentosInfo = medicamentos.map((medicamento, index) => `${medicamento} a las ${horasMedicamentos[index]}`).join(', ');
+
+            alert('Datos del seguimiento guardados:\n' +
+                `Nombre: ${nombre}\n` +
+                `ID: ${id}\n` +
+                `Presión Arterial: ${presion}\n` +
+                `Pulso: ${pulso}\n` +
+                `Otros Detalles: ${otros}\n` +
+                `Fecha y Hora: ${fechaHora}\n` +
+                `Resultados de Examen: ${examenesInfo}\n` +
+                `Medicamentos Recetados: ${medicamentosInfo}\n` +
+                `Nombre del Archivo: ${nombreArchivo}`
+            );
+        }
+
+        document.getElementById('agregar-medicamento').addEventListener('click', function() {
+            const container = document.getElementById('medicamentos-container');
+            const newMedicamentoInput = document.createElement('div');
+            newMedicamentoInput.classList.add('medicamento-input');
+            newMedicamentoInput.innerHTML = `
+                <input type="text" name="medicamento[]" class="medicamento">
+                <input type="time" name="hora-medicamento[]" class="hora-medicamento">
+            `;
+            container.appendChild(newMedicamentoInput);
+        });
+
+        document.getElementById('visualizacion-cantidad').addEventListener('change', function() {
+            const visualizacionCantidad = document.getElementById('visualizacion-cantidad').value;
+            const fechaContainer = document.getElementById('fecha-container');
+            const fechaInput = document.getElementById('fecha');
+
+            switch (visualizacionCantidad) {
+                case 'diario':
+                    fechaContainer.style.display = 'block';
+                    fechaInput.type = 'date';
+                    break;
+                case 'semanal':
+                    fechaContainer.style.display = 'block';
+                    fechaInput.type = 'week';
+                    break;
+                case 'mensual':
+                    fechaContainer.style.display = 'block';
+                    fechaInput.type = 'month';
+                    break;
+                case 'anual':
+                    fechaContainer.style.display = 'block';
+                    fechaInput.type = 'number';
+                    fechaInput.placeholder = 'Año';
+                    break;
+                default:
+                    fechaContainer.style.display = 'none';
+            }
+        });
+
+        document.getElementById('ver-resumen').addEventListener('click', function() {
+            const cantidad = document.getElementById('visualizacion-cantidad').value;
+            const fecha = document.getElementById('fecha').value;
+            const visualizacion = document.getElementById('visualizacion').value;
+            let resumen = '';
+
+            switch (cantidad) {
+                case 'diario':
+                    resumen += 'Datos mostrados en tabla/gráfico para el día ' + fecha + ': ';
+                    break;
+                case 'semanal':
+                    resumen += 'Datos mostrados en tabla/gráfico para la semana ' + getWeekNumber(new Date(fecha)) + ' del año ' + (new Date(fecha)).getFullYear() + ': ';
+                    break;
+                case 'mensual':
+                    resumen += 'Datos mostrados en tabla/gráfico para el mes ' + getMonthName((new Date(fecha)).getMonth()) + ' del año ' + (new Date(fecha)).getFullYear() + ': ';
+                    break;
+                case 'anual':
+                    resumen += 'Datos mostrados en tabla/gráfico para el año ' + fecha + ': ';
+                    break;
+                default:
+                    resumen += 'No se seleccionó una opción de visualización válida.';
+            }
+
+            switch (visualizacion) {
+                case 'tabla':
+                    resumen += 'Datos mostrados en tabla';
+                    // Lógica para mostrar datos en tabla
+                    break;
+                case 'grafico-puntos':
+                    resumen += 'Datos mostrados en gráfico de puntos';
+                    // Lógica para mostrar datos en gráfico de puntos
+                    break;
+                case 'grafico-linea':
+                    resumen += 'Datos mostrados en gráfico de línea';
+                    // Lógica para mostrar datos en gráfico de línea
+                    break;
+                case 'grafico-barras':
+                    resumen += 'Datos mostrados en gráfico de barras';
+                    // Lógica para mostrar datos en gráfico de barras
+                    break;
+                default:
+                    resumen += 'No se seleccionó una opción de visualización válida.';
+            }
+
+            document.getElementById('resumen-container').innerText = resumen;
+        });
+
+        function getWeekNumber(date) {
+            const oneJan = new Date(date.getFullYear(), 0, 1);
+            const numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));
+            return Math.ceil((date.getDay() + 1 + numberOfDays) / 7);
+        }
+
+        function getMonthName(monthIndex) {
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            return months[monthIndex];
+        }
+
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const nombre = params.get('nombre');
+            const id = params.get('id');
+            return { nombre, id };
+        }
+    
+        function fillPatientInfo() {
+            const { nombre, id } = getUrlParams();
+            document.getElementById('nombre').value = nombre;
+            document.getElementById('id').value = id;
+        }
+    
+        fillPatientInfo();
+    </script>
+</body>
+</html>
+

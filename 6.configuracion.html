@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración</title>
+    <link rel="stylesheet" href="configuracion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <a href="2.index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver</a>
+    <div class="container">
+        <h1>Configuración</h1>
+        <div class="option">
+            <label for="fontSize">Tamaño de letra:</label>
+            <select id="fontSize">
+                <option value="small">Pequeño</option>
+                <option value="medium" selected>Mediano</option>
+                <option value="large">Grande</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="theme">Tema:</label>
+            <select id="theme">
+                <option value="light" selected>Claro</option>
+                <option value="dark">Oscuro</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="language">Idioma:</label>
+            <select id="language">
+                <option value="en" selected>English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="changePassword">Cambiar Contraseña:</label>
+            <button id="changePasswordBtn" onclick="abrirNuevaVentana()">Cambiar Contraseña</button>
+        </div>
+        <button id="applyBtn">Aplicar</button>
+    </div>
+
+    <script src="configuracion.js"></script>
+
+    <script>
+        function abrirNuevaVentana() {
+            window.open("cambiar_contraseña.html", "_blank", "width=500, height=400");
+        }
+    </script>
+</body>
+</html>

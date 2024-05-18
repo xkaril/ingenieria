@@ -1,0 +1,299 @@
+
+.topnav {
+    overflow: hidden;
+    background-color: #007bff;
+}
+
+.topnav a {
+    float: left;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #0056b3;
+}
+
+.topnav a.active {
+    background-color: #0056b3;
+}
+
+.topnav a.right {
+    float: right;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    color: #fff;
+    background-color: #007bff;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+.formulario {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.formulario h2 {
+    margin-bottom: 20px;
+}
+
+.formulario label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="tel"],
+.formulario input[type="password"],
+.formulario input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.formulario input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.formulario input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+}
+.volver-inicio {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.volver-inicio:hover {
+    text-decoration: underline;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #007bff;
+    padding: 10px 0;
+}
+
+.topnav .titulo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header.encabezado {
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; 
+}
+
+.menu-list.active {
+    display: flex; 
+}
+
+.menu-list li {
+    margin-right: 20px;
+    position: relative;
+}
+
+.menu-list li:hover .submenu {
+    display: block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+.submenu li a {
+    color: #333; 
+    text-decoration: none;
+    border-bottom: none; 
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+.menu-list li a {
+    color: #ffffff !important; 
+    text-decoration: none !important; 
+}
+.submenu{
+    color: #000000 !important;
+    text-decoration: none !important; 
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; 
+}
+
+.menu-list.active {
+    display: flex; 
+}
+
+.menu-list li {
+    margin-right: 20px;
+    position: relative;
+}
+
+.menu-list li:hover .submenu {
+    display: block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+.submenu li a {
+    color: #333; 
+    text-decoration: none;
+    border-bottom: none;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.Logo-Inicio {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.Logo-Inicio img {
+    width: 400px; 
+    height: auto; 
+}

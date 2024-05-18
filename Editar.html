@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Paciente</title>
+    <link rel="stylesheet" href="editar.css">
+    <style>
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .back-link:hover {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <a href="E:\SOFTWARE\Proyecto\2.index.html" class="back-link">&#8592; Volver al inicio</a>
+    <div class="container">
+        <h2>Editar Paciente</h2>
+        <form action="#" method="POST" id="patientForm">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA" required>
+
+            <label for="rut">RUT:</label>
+            <p>Ingresa el RUT en las casillas de la sección: primero los números y luego el guion y después el dígito verificador.</p>
+            <input type="text" id="rutNumeros" name="rutNumeros" maxlength="8" required>
+            <span>-</span>
+            <input type="text" id="rutVerificador" name="rutVerificador" maxlength="1" required>
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <label for="direccion">Dirección:</label>
+            <textarea id="direccion" name="direccion" required></textarea>
+
+            <label for="telefono">Número de teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="sistemaSalud">Sistema de salud:</label>
+            <select id="sistemaSalud" name="sistemaSalud" required>
+                <option value="FONASA">FONASA</option>
+                <option value="ISAPRE">ISAPRE</option>
+            </select>
+
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias"></textarea>
+
+            <label for="historialMedico">Historial médico:</label>
+            <textarea id="historialMedico" name="historialMedico"></textarea>
+
+            <label for="tipoCancer">Tipo de cáncer:</label>
+            <input type="text" id="tipoCancer" name="tipoCancer">
+
+            <label for="notasAdicionales">Notas adicionales:</label>
+            <textarea id="notasAdicionales" name="notasAdicionales"></textarea>
+
+            <input type="submit" value="Guardar Cambios">
+        </form>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var fontSize = localStorage.getItem('fontSize');
+            var theme = localStorage.getItem('theme');
+            var language = localStorage.getItem('language');
+
+            if (fontSize) {
+                applyFontSize(fontSize);
+            }
+
+            if (theme) {
+                applyTheme(theme);
+            }
+
+            if (language) {
+                applyLanguage(language);
+            }
+        });
+
+        function applyFontSize(size) {
+            document.body.style.fontSize = size;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            } else {
+                document.body.style.backgroundColor = '#f2f2f2';
+                document.body.style.color = '#000';
+            }
+        }
+
+        function applyLanguage(language) {
+
+            alert('Idioma cambiado a ' + language);
+        }
+    </script>
+    <script src="configuraciones.js"></script>
+</body>
+</html>

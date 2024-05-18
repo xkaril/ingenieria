@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Pacientes</title>
+    <link rel="stylesheet" href="eliminar.css">
+    <style>
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .back-link:hover {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <a href="2.index.html" class="back-link">&#8592; Volver al inicio</a>
+    <div class="container">
+        <h2>Selecciona los pacientes que deseas eliminar</h2>
+        <div class="profiles-container">
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 1">
+                <p>Nombre del Paciente 1</p>
+                <input type="checkbox" name="paciente1" id="paciente1">
+            </div>
+            
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 2">
+                <p>Nombre del Paciente 2</p>
+                <input type="checkbox" name="paciente2" id="paciente2">
+            </div>
+
+            <div class="profile">
+                <img src="Imagenes/Perfil.png" alt="Paciente 3">
+                <p>Nombre del Paciente 3</p>
+                <input type="checkbox" name="paciente3" id="paciente3">
+            </div>
+        </div>
+        <button onclick="confirmarEliminacion()">Eliminar Pacientes</button>
+    </div>
+
+    <div id="confirmacion" class="modal hidden">
+        <div class="modal-content">
+            <p>¿Estás seguro de que deseas eliminar los pacientes seleccionados?</p>
+            <div class="modal-buttons">
+                <button onclick="eliminarPacientes()">Sí</button>
+                <button onclick="cerrarModal()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mensaje-eliminacion" class="mensaje-eliminacion hidden">
+        <p>Los pacientes seleccionados han sido eliminados correctamente.</p>
+    </div>
+
+    <script>
+        function confirmarEliminacion() {
+            document.getElementById("confirmacion").classList.remove("hidden");
+        }
+
+        function cerrarModal() {
+            document.getElementById("confirmacion").classList.add("hidden");
+        }
+
+        function eliminarPacientes() {
+           
+            document.getElementById("mensaje-eliminacion").classList.remove("hidden");
+            setTimeout(function(){
+                document.getElementById("mensaje-eliminacion").classList.add("hidden");
+            }, 2000); 
+            cerrarModal();
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var fontSize = localStorage.getItem('fontSize');
+            var theme = localStorage.getItem('theme');
+            var language = localStorage.getItem('language');
+
+            if (fontSize) {
+                applyFontSize(fontSize);
+            }
+
+            if (theme) {
+                applyTheme(theme);
+            }
+
+            if (language) {
+                applyLanguage(language);
+            }
+        });
+
+        function applyFontSize(size) {
+            document.body.style.fontSize = size;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            } else {
+                document.body.style.backgroundColor = '#f2f2f2';
+                document.body.style.color = '#000';
+            }
+        }
+
+        function applyLanguage(language) {
+
+            alert('Idioma cambiado a ' + language);
+        }
+    </script>
+    <script src="configuraciones.js"></script>
+</body>
+</html>

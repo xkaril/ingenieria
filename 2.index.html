@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        footer {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 5px;
+            color: #000; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="menu-list" id="menuList">
+                <li><a href="#">Pacientes</a>
+                    <div class="sub-menu" id="submenu">
+                        <ul class="submenu">
+                            <li><a href="3.1Agregar.html">Agregar</a></li>
+                            <li><a href="Editar.html">Editar</a></li>
+                            <li><a href="3.2Eliminar.html">Eliminar</a></li>
+                            <li><a href="3.Pacientes.html">Registros Medicos</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">Citas Medicas</a>
+                    <div class="sub-menu" id="submenu">
+                        <ul class="submenu">
+                            <li><a href="4.Calendario.html">Calendario de Consultas</a></li>
+                            <li><a href="identificacion.html">Reservar Hora</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="5.Centro_de_mensajes.html">Centro de Mensajes</a></li>
+                <li><a href="7.Compra_de_Bonos.html">Compra de Bonos</a></li>
+                <li><a href="8.Medicamentos.html">Medicamentos</a></li>
+                <li><a href="9.ingreso_de_pagos.html">Ingreso de pagos</a></li>
+                <li><a href="6.configuracion.html">Configuraciones</a></li>
+                <li><a href="1.login.html">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+        <h1>OncoLife</h1>
+    </header>
+
+   
+
+    <footer>
+        <p>Servicio Técnico OncoLife</p>
+        <p>Correo electrónico: soporte@oncolife.com</p>
+        <p>Número de teléfono: +1234567890</p>
+    </footer>
+
+    <script src="validaciones.js"></script>
+</body>
+</html>
