@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil del Paciente</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +11,43 @@
             color: #333;
             margin: 0;
             padding: 0;
+        }
+
+        .header {
+            background-color: #008cba;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .sub-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .sub-menu a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sub-menu a:hover {
+            background-color: #008cba;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .container {
@@ -23,214 +59,351 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-            color: #008cba;
-        }
-
-        .header .patient-id {
+        .back-link {
             font-size: 18px;
-            color: #666;
-        }
-
-        .nav-bar {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-
-        .nav-bar a {
             text-decoration: none;
+            color: #555;
+            display: block;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
             color: #008cba;
-            font-size: 18px;
+        }
+
+        .diseases-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .disease {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .disease:hover {
+            transform: translateY(-5px);
+        }
+
+        .disease h3 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #008cba;
+            margin-bottom: 10px;
+        }
+
+        .disease p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .simulation-button {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            border-radius: 5px;
             padding: 10px 20px;
+            cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .nav-bar a:hover {
-            background-color: #008cba;
-            color: white;
-            border-radius: 5px;
+        .simulation-button:hover {
+            background-color: #005f6b;
         }
 
-        .section {
-            display: none;
+        .tratamiento {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
 
-        .section.active {
-            display: block;
+        .tratamiento:hover {
+            transform: translateY(-5px);
         }
 
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .tratamiento h4 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #008cba;
+            margin-bottom: 10px;
         }
 
-        form label {
-            display: block;
-            margin-bottom: 5px;
+        .tratamiento p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tratamiento span {
             font-weight: bold;
+            color: #333;
         }
 
-        form input, form select, form textarea {
+        /* Estilos adicionales para los formularios */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
             border-radius: 5px;
+            box-sizing: border-box;
         }
 
-        form textarea {
-            resize: vertical;
-        }
-
-        button {
-            background-color: #008cba;
+        button[type="submit"],
+        button[type="button"] {
+            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
+            font-size: 16px;
         }
 
-        button:hover {
-            background-color: #005f7f;
+        button[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        .vizualizacion {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .vizualizacion label {
+            margin-right: 10px;
+        }
+
+        .resumen {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .resumen button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .resumen button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Perfil del Paciente</h1>
-            <div class="patient-id">ID del Paciente: <span id="patient-id"></span></div>
-        </div>
-        <div class="nav-bar">
-            <a href="#" id="link-datos-personales">Datos Personales</a>
-            <a href="#" id="link-enfermedades">Enfermedades</a>
-            <a href="#" id="link-seguimiento-tratamientos">Seguimiento de Tratamientos</a>
-        </div>
+    <div class="header">
+        <h1>ID del Paciente: <span id="patient-id"></span></h1>
+    </div>
 
-        <!-- Sección de Datos Personales -->
-        <div id="section-datos-personales" class="section">
-            <h2>Datos Personales</h2>
-            <form id="datos-personales-form">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+    <div class="sub-menu">
+        <a href="#" onclick="showSection('datos-personales')">Datos Personales</a>
+        <a href="#" onclick="showSection('antecedentes-clinicos')">Antecedentes Clínicos</a>
+        <a href="#" onclick="showSection('contactos')">Contactos</a>
+        <a href="#" onclick="showSection('enfermedades')">Enfermedades</a>
+        <a href="#" onclick="showSection('seguimiento')">Seguimiento</a>
+    </div>
 
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
+    <div class="content">
+        <!-- Datos Personales -->
+        <div id="datos-personales" class="section hidden">
+            <div class="form-container">
+                <h1>Datos Personales</h1>
+                <form id="datos-personales-form">
+                    <label for="nombre">Nombre del Paciente:</label>
+                    <input type="text" id="nombre" name="nombre" readonly>
 
-                <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+                    <label for="id">ID del Paciente:</label>
+                    <input type="text" id="id" name="id" readonly>
 
-                <label for="genero">Género:</label>
-                <select id="genero" name="genero" required>
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
-                    <option value="otro">Otro</option>
-                </select>
+                    <label for="edad">Edad:</label>
+                    <input type="text" id="edad" name="edad" readonly>
 
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required>
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" readonly>
 
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
-
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" id="correo" name="correo" required>
-            </form>
-            <button onclick="guardarDatosPersonales()">Guardar Cambios</button>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" readonly>
+                </form>
+            </div>
         </div>
 
-        <!-- Sección de Enfermedades -->
-        <div id="section-enfermedades" class="section">
-            <h2>Enfermedades del Paciente</h2>
-            <form id="enfermedades-form">
-                <label for="enfermedad">Enfermedad:</label>
-                <input type="text" id="enfermedad" name="enfermedad" required>
+        <!-- Antecedentes Clínicos -->
+        <div id="antecedentes-clinicos" class="section hidden">
+            <div class="form-container">
+                <h1>Antecedentes Clínicos</h1>
+                <form id="antecedentes-clinicos-form">
+                    <label for="procedencia">Procedencia del Paciente:</label>
+                    <input type="text" id="procedencia" name="procedencia" readonly>
 
-                <label for="fecha-diagnostico">Fecha de Diagnóstico:</label>
-                <input type="date" id="fecha-diagnostico" name="fecha-diagnostico" required>
+                    <label for="estado">Estado del Paciente:</label>
+                    <input type="text" id="estado" name="estado" readonly>
 
-                <label for="tratamiento">Tratamiento:</label>
-                <textarea id="tratamiento" name="tratamiento" rows="4" required></textarea>
+                    <label for="medico">Médico:</label>
+                    <input type="text" id="medico" name="medico" readonly>
 
-                <label for="notas">Notas Adicionales:</label>
-                <textarea id="notas" name="notas" rows="4"></textarea>
-            </form>
-            <button onclick="guardarEnfermedades()">Guardar Enfermedades</button>
+                    <label for="diagnostico">Diagnóstico de Ingreso:</label>
+                    <textarea id="diagnostico" name="diagnostico" readonly></textarea>
+                </form>
+            </div>
         </div>
 
-        <!-- Sección de Seguimiento de Tratamientos -->
-        <div id="section-seguimiento-tratamientos" class="section">
-            <h2>Seguimiento de Tratamientos</h2>
-            <form id="seguimiento-tratamientos-form">
-                <label for="tratamiento">Tratamiento:</label>
-                <input type="text" id="tratamiento-seguimiento" name="tratamiento" required>
+        <!-- Contactos -->
+        <div id="contactos" class="section hidden">
+            <div class="form-container">
+                <h1>Contactos</h1>
+                <form id="contactos-form">
+                    <label for="nombre-contacto">Nombre del Contacto:</label>
+                    <input type="text" id="nombre-contacto" name="nombre-contacto" required>
 
-                <label for="fecha-inicio">Fecha de Inicio:</label>
-                <input type="date" id="fecha-inicio" name="fecha-inicio" required>
+                    <label for="relacion">Relación con el Paciente:</label>
+                    <input type="text" id="relacion" name="relacion" required>
 
-                <label for="fecha-fin">Fecha de Fin:</label>
-                <input type="date" id="fecha-fin" name="fecha-fin" required>
+                    <label for="telefono-contacto">Teléfono del Contacto:</label>
+                    <input type="text" id="telefono-contacto" name="telefono-contacto" required>
 
-                <label for="observaciones">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones" rows="4"></textarea>
-            </form>
-            <button onclick="guardarSeguimientoTratamientos()">Guardar Seguimiento</button>
+                    <button type="submit">Guardar Contacto</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Enfermedades -->
+        <div id="enfermedades" class="section hidden">
+            <div class="container">
+                <a href="profile.html" class="back-link">&lt; Volver a perfil</a>
+                <div class="diseases-container">
+                    <div class="disease">
+                        <h3>Enfermedad 1</h3>
+                        <p>Descripción breve de la enfermedad 1.</p>
+                        <button class="simulation-button">Simular Tratamiento</button>
+                    </div>
+                    <div class="disease">
+                        <h3>Enfermedad 2</h3>
+                        <p>Descripción breve de la enfermedad 2.</p>
+                        <button class="simulation-button">Simular Tratamiento</button>
+                    </div>
+                    <!-- Agregar más enfermedades según sea necesario -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Seguimiento -->
+        <div id="seguimiento" class="section hidden">
+            <div class="form-container">
+                <h1>Seguimiento del Tratamiento</h1>
+                <form id="seguimiento-form">
+                    <label for="fecha">Fecha de Seguimiento:</label>
+                    <input type="text" id="fecha" name="fecha" required>
+
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" required></textarea>
+
+                    <label for="medicamentos">Medicamentos Recetados:</label>
+                    <input type="text" id="medicamentos" name="medicamentos" required>
+
+                    <button type="submit">Guardar Seguimiento</button>
+                </form>
+                <div class="vizualizacion">
+                    <label for="visualization-date">Fecha de Visualización:</label>
+                    <input type="date" id="visualization-date">
+                    <button onclick="visualizeData()">Visualizar Datos</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // JavaScript para navegación entre secciones
-        document.getElementById('link-datos-personales').addEventListener('click', function() {
-            mostrarSeccion('datos-personales');
-        });
+        // Función para mostrar la sección seleccionada
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.add('hidden'));
 
-        document.getElementById('link-enfermedades').addEventListener('click', function() {
-            mostrarSeccion('enfermedades');
-        });
+            // Mostrar la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.remove('hidden');
 
-        document.getElementById('link-seguimiento-tratamientos').addEventListener('click', function() {
-            mostrarSeccion('seguimiento-tratamientos');
-        });
-
-        function mostrarSeccion(seccion) {
-            document.querySelectorAll('.section').forEach(function(section) {
-                section.classList.remove('active');
-            });
-            document.getElementById('section-' + seccion).classList.add('active');
+            // Mostrar/ocultar la sección de visualización en seguimiento
+            const visualizationSection = document.querySelector('.vizualizacion');
+            if (sectionId === 'seguimiento') {
+                visualizationSection.classList.remove('hidden');
+            } else {
+                visualizationSection.classList.add('hidden');
+            }
         }
 
-        // Llenar el ID del paciente (puedes ajustar según necesites)
-        document.getElementById('patient-id').textContent = '12345'; // Aquí asignar el ID del paciente real
+        // Datos de ejemplo
+        const patientData = {
+            nombre: "Juan Pérez",
+            id: "12345",
+            edad: "50",
+            direccion: "Calle Falsa 123",
+            telefono: "555-1234",
+            procedencia: "Ciudad",
+            estado: "Estable",
+            medico: "Dr. Martínez",
+            diagnostico: "Diagnóstico detallado del paciente."
+        };
 
-        // Función para guardar datos personales (implementación según tus necesidades)
-        function guardarDatosPersonales() {
-            // Código para guardar datos personales
-            alert('Datos personales guardados.');
+        // Función para llenar los datos del paciente en los formularios
+        function fillPatientData() {
+            document.getElementById("nombre").value = patientData.nombre;
+            document.getElementById("id").value = patientData.id;
+            document.getElementById("edad").value = patientData.edad;
+            document.getElementById("direccion").value = patientData.direccion;
+            document.getElementById("telefono").value = patientData.telefono;
+            document.getElementById("procedencia").value = patientData.procedencia;
+            document.getElementById("estado").value = patientData.estado;
+            document.getElementById("medico").value = patientData.medico;
+            document.getElementById("diagnostico").value = patientData.diagnostico;
         }
 
-        // Función para guardar enfermedades (implementación según tus necesidades)
-        function guardarEnfermedades() {
-            // Código para guardar enfermedades
-            alert('Enfermedades guardadas.');
-        }
+        // Llamar a la función para llenar los datos al cargar la página
+        window.onload = fillPatientData;
 
-        // Función para guardar seguimiento de tratamientos (implementación según tus necesidades)
-        function guardarSeguimientoTratamientos() {
-            // Código para guardar seguimiento de tratamientos
-            alert('Seguimiento de tratamientos guardado.');
+        // Función de visualización de datos (ejemplo)
+        function visualizeData() {
+            const date = document.getElementById('visualization-date').value;
+            alert('Mostrando datos para la fecha: ' + date);
         }
     </script>
 </body>
 </html>
-
