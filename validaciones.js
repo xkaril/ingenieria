@@ -57,3 +57,13 @@ function toggleMenu() {
     var menuList = document.getElementById("menuList");
     menuList.classList.toggle("active");
 }
+
+
+document.getElementById('formAgregarPaciente').addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+});
+
+function generarRutFicticio() {
+    
+}
