@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Submenú Paciente</title>
+    <link rel="stylesheet" href="Paciente.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .patient-details {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .patient-details p {
+            margin: 10px 0;
+            color: #555;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        ul li a {
+            display: block;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul li a:hover {
+            background-color: #218838;
+        }
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .patient-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .patient {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            width: 150px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .patient p {
+            margin: 10px 0;
+            color: #555;
+        }
+    </style>
+    <script>
+        function loadPatientDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('id');
+            const patients = JSON.parse(localStorage.getItem('patients'));
+            const patient = patients.find(p => p.id === patientId);
+
+            if (patient) {
+                document.getElementById('patient-name').textContent = patient.name;
+                document.getElementById('patient-details').innerHTML = `
+                    <p><strong>Apellido Paterno:</strong> ${patient.apellidoPaterno}</p>
+                    <p><strong>Apellido Materno:</strong> ${patient.apellidoMaterno}</p>
+                    <p><strong>Fecha de Nacimiento:</strong> ${patient.fechaNacimiento}</p>
+                    <p><strong>Edad:</strong> ${patient.edad}</p>
+                    <p><strong>Sexo:</strong> ${patient.sexo}</p>
+                    <p><strong>Actividad:</strong> ${patient.actividad}</p>
+                    <p><strong>Estado Civil:</strong> ${patient.estadoCivil}</p>
+                    <p><strong>Teléfono Fijo:</strong> ${patient.telefonoFijo}</p>
+                    <p><strong>Teléfono Móvil:</strong> ${patient.telefonoMovil}</p>
+                    <p><strong>Email:</strong> ${patient.email}</p>
+                    <p><strong>Dirección:</strong> ${patient.direccion}</p>
+                    <p><strong>Comuna:</strong> ${patient.comuna}</p>
+                    <p><strong>Ciudad:</strong> ${patient.ciudad}</p>
+                    <p><strong>País:</strong> ${patient.pais}</p>
+                `;
+            } else {
+                document.getElementById('patient-details').innerHTML = '<p>Paciente no encontrado.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPatientDetails);
+    </script>
+</head>
+<body>
+    <h1>Submenú del Paciente</h1>
+    <h2 id="patient-name">Nombre del Paciente</h2>
+    <div id="patient-details" class="patient-details">
+        <!-- Detalles del paciente se cargarán aquí dinámicamente -->
+    </div>
+    <ul>
+        <li><a href="3.1Agregar.html">Agregar Paciente</a></li>
+        <li><a href="3.2Eliminar.html">Eliminar Paciente</a></li>
+        <li><a href="Analisis_genomico.html">Análisis Genómico</a></li>
+        <li><a href="analisis_riesgo_genetico.html">Análisis de Riesgo Genético</a></li>
+        <li><a href="enfermedades.html">Enfermedades</a></li>
+        <li><a href="Seguimiento_tratamientos.html">Seguimiento de Tratamientos</a></li>
+        <li><a href="Editar.html">Editar Información del Paciente</a></li>
+    </ul>
+</body>
+</html>

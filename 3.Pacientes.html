@@ -1,141 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil del Paciente</title>
-    <link rel="stylesheet" href="paciente.css">
+    <title>Pacientes</title>
     <style>
-        /* Estilos adicionales para botones */
-        .profile button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block; /* Para que cada botón esté en una línea */
-            width: 100%; /* Para que los botones ocupen todo el ancho disponible */
-            text-align: center; /* Centrar el texto dentro de los botones */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
         }
-
-        .profile button:hover {
-            background-color: #45a049;
-        }
-
-        /* Estilos para el botón de análisis de riesgo */
-        .view-risk-analysis-button {
-            background-color: #008CBA;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block;
-            width: 100%;
+        h1 {
             text-align: center;
+            color: #333;
         }
-
-        .view-risk-analysis-button:hover {
-            background-color: #005f6b;
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        /* Estilos para el enlace de volver */
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        .search-container input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .add-patient {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .add-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
             text-decoration: none;
-            color: black; /* Cambia el color del texto a negro */
+            border-radius: 5px;
+            font-size: 16px;
         }
-
-        .back-link:hover {
+        .add-button span {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        .patient-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .patient {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            width: 150px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .patient img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+        .patient p {
+            margin: 10px 0;
             color: #555;
         }
-
-        .container {
-            margin-top: 50px; /* Añadir espacio en la parte superior para evitar solapamiento */
-        }
-
-        /* Estilos para el nombre del paciente */
-        .profile p {
-            font-weight: bold; /* Hace que el nombre del paciente se vea en negrita */
-            margin-bottom: 5px; /* Añade espacio debajo del nombre */
-        }
-
-        /* Estilos para la ID del paciente */
-        .profile span {
-            font-size: 0.8em; /* Reduce el tamaño del texto de la ID */
-            color: #888; /* Cambia el color del texto de la ID */
-        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Datos de pacientes
+            const patients = [
+                {id: '00000001', name: 'Luis Pérez', apellidoPaterno: 'Pérez', apellidoMaterno: 'Gómez', fechaNacimiento: '1980-01-01', edad: 44, sexo: 'Masculino', actividad: 'Ingeniero', estadoCivil: 'Soltero', telefonoFijo: '123456789', telefonoMovil: '987654321', email: 'luis.perez@example.com', direccion: 'Calle Falsa 123', comuna: 'Comuna 1', ciudad: 'Ciudad 1', pais: 'Chile'},
+                {id: '00000002', name: 'Laura González', apellidoPaterno: 'González', apellidoMaterno: 'Rodríguez', fechaNacimiento: '1990-02-02', edad: 34, sexo: 'Femenino', actividad: 'Doctora', estadoCivil: 'Casada', telefonoFijo: '123456789', telefonoMovil: '987654321', email: 'laura.gonzalez@example.com', direccion: 'Calle Falsa 123', comuna: 'Comuna 2', ciudad: 'Ciudad 2', pais: 'Chile'},
+                // Añadir 141 pacientes adicionales aquí...
+            ];
+
+            // Guardar datos de pacientes en localStorage
+            localStorage.setItem('patients', JSON.stringify(patients));
+
+            // Mostrar pacientes en la página
+            const patientList = document.querySelector('.patient-list');
+            patients.forEach(patient => {
+                const patientDiv = document.createElement('div');
+                patientDiv.className = 'patient';
+                patientDiv.dataset.id = patient.id;
+                patientDiv.innerHTML = `
+                    <a href="submenu_paciente.html?id=${patient.id}">
+                        <img src="Imagenes/Perfil.png" alt="${patient.name}">
+                    </a>
+                    <p>${patient.name} (ID: ${patient.id})</p>
+                `;
+                patientList.appendChild(patientDiv);
+            });
+
+            // Búsqueda de pacientes
+            document.getElementById('search-input').addEventListener('keyup', (event) => {
+                const query = event.target.value.toLowerCase();
+                document.querySelectorAll('.patient').forEach(patientDiv => {
+                    const name = patientDiv.querySelector('p').textContent.toLowerCase();
+                    if (name.startsWith(query)) {
+                        patientDiv.style.display = '';
+                    } else {
+                        patientDiv.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-    <a href="2.index.html" class="back-link">&#8592; Volver al inicio</a>
-    <div class="container">
-        <h2>Perfil del Paciente</h2>
-        <div class="profiles-container">
-            <div class="profile">
-                <img src="Imagenes/Perfil.png" alt="Paciente 1" onclick="mostrarInformacionContacto('Nombre del Familiar 1', '12345678-9', 'Padre', '+56912345678', 'Dirección 123')">
-                <p>Nombre del Paciente 1</p>
-                <span>ID: 12345678-9</span>
-                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
-                <!-- Agrega el botón de seguimiento de tratamientos -->
-                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 1', '12345678-9')">Seguimiento de Tratamientos</button>
-                <button onclick="verEnfermedades()">Ver Enfermedades</button>
-            </div>
-            
-            <div class="profile">
-                <img src="Imagenes/Perfil.png" alt="Paciente 2" onclick="mostrarInformacionContacto('Nombre del Familiar 2', '98765432-1', 'Madre', '+56998765432', 'Dirección 456')">
-                <p>Nombre del Paciente 2</p>
-                <span>ID: 98765432-1</span>
-                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
-                <!-- Agrega el botón de seguimiento de tratamientos -->
-                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 2', '98765432-1')">Seguimiento de Tratamientos</button>
-                <button onclick="verEnfermedades()">Ver Enfermedades</button>
-            </div>
-            <div class="profile">
-                <img src="Imagenes/Perfil.png" alt="Paciente 3" onclick="mostrarInformacionContacto('Nombre del Familiar 3', '13579246-8', 'Hermano', '+56913579246', 'Dirección 789')">
-                <p>Nombre del Paciente 3</p>
-                <span>ID: 13579246-8</span>
-                <button onclick="redireccionarAnalisisGenomico()">Análisis Genómico</button>
-                <!-- Agrega el botón de seguimiento de tratamientos -->
-                <button onclick="redireccionarSeguimientoTratamientos('Nombre del Paciente 3', '13579246-8')">Seguimiento de Tratamientos</button>
-                <button onclick="verEnfermedades()">Ver Enfermedades</button>
-            </div>
-        </div>
-        <!-- Botón para el análisis de riesgo -->
-        <button class="view-risk-analysis-button" onclick="redireccionarAnalisisRiesgo()">Análisis de Riesgo</button>
+    <h1>Lista de Pacientes</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar por nombre o ID de paciente">
     </div>
+    <div class="add-patient">
+        <a href="3.1Agregar.html" class="add-button">
+            <span>+</span> Agregar Paciente
+        </a>
+    </div>
+    <div class="patient-list">
+        <!-- Generar 36 pacientes de ejemplo -->
+        <script>
+            const patients = [
+                {id: '00000001', name: 'Luis Pérez'},
+                {id: '00000002', name: 'Laura González'},
+                {id: '00000003', name: 'Lucía López'},
+                {id: '00000004', name: 'Lorena Rodríguez'},
+                {id: '00000005', name: 'Luz Fernández'},
+                {id: '00000006', name: 'Luis Martínez'},
+                {id: '00000007', name: 'Lorena Sánchez'},
+                {id: '00000008', name: 'Laura Ramírez'},
+                {id: '00000009', name: 'Lucas Torres'},
+                {id: '00000010', name: 'Lidia Reyes'},
+                {id: '00000011', name: 'Leonardo Castro'},
+                {id: '00000012', name: 'Luisa Ruiz'},
+                {id: '00000013', name: 'Lorenzo Rojas'},
+                {id: '00000014', name: 'Luciana Vega'},
+                {id: '00000015', name: 'Linda Medina'},
+                {id: '00000016', name: 'Laura Ortega'},
+                {id: '00000017', name: 'Lorenzo Gil'},
+                {id: '00000018', name: 'Luna Navarro'},
+                {id: '00000019', name: 'Lino Mora'},
+                {id: '00000020', name: 'Lourdes Soto'},
+                {id: '00000021', name: 'León Jiménez'},
+                {id: '00000022', name: 'Lidia Fuentes'},
+                {id: '00000023', name: 'Lázaro Cabrera'},
+                {id: '00000024', name: 'Liliana Paredes'},
+                {id: '00000025', name: 'Lucho Miranda'},
+                {id: '00000026', name: 'Leila Campos'},
+                {id: '00000027', name: 'Lorenzo Peña'},
+                {id: '00000028', name: 'Laura Herrera'},
+                {id: '00000029', name: 'Luciano Ramos'},
+                {id: '00000030', name: 'Lía Ortiz'},
+                {id: '00000031', name: 'Lionel Vargas'},
+                {id: '00000032', name: 'Liliana Luna'},
+                {id: '00000033', name: 'Lisandro Morales'},
+                {id: '00000034', name: 'Luz Cabrera'},
+                {id: '00000035', name: 'Lucas Bautista'},
+                {id: '00000036', name: 'Lourdes Castillo'}
+            ];
 
-    <script>
-        function mostrarInformacionContacto(nombre, rut, parentezco, telefono, direccion) {
-            var infoContacto = `Nombre: ${nombre}\nRUT: ${rut}\nParentezco: ${parentezco}\nTeléfono: ${telefono}\nDirección: ${direccion}`;
-            alert(infoContacto);
-        }
-
-        function redireccionarAnalisisGenomico() {
-            window.location.href = "analisis_genomico.html";
-        }
-
-        function redireccionarSeguimientoTratamientos(nombre, id) {
-            // Pasa el nombre y la ID del paciente a la página de seguimiento de tratamientos
-            window.location.href = `Seguimiento_tratamientos.html?nombre=${nombre}&id=${id}`;
-        }
-
-        function verEnfermedades() {
-            window.location.href = "enfermedades.html";
-        }
-
-        function redireccionarAnalisisRiesgo() {
-            window.location.href = "analisis_riesgo_genetico.html";
-        }
-    </script>
-
-    <script src="configuraciones.js"></script>
+            for (let patient of patients) {
+                document.write(`
+                    <div class="patient" data-id="${patient.id}">
+                        <a href="submenu_paciente.html?id=${patient.id}">
+                            <img src="Imagenes/Perfil.png" alt="${patient.name}">
+                        </a>
+                        <p>${patient.name} (ID: ${patient.id})</p>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
 </body>
 </html>
