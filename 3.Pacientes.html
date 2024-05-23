@@ -66,15 +66,85 @@
             margin: 10px 0;
             color: #555;
         }
+        .back-link {
+            color: black;
+        }
     </style>
+</head>
+<body>
+    <a href="2.index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+    <h1>Lista de Pacientes</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar por nombre o ID de paciente">
+    </div>
+    <div class="add-patient">
+        <a href="3.1Agregar.html" class="add-button">
+            <span>+</span> Agregar Paciente
+        </a>
+    </div>
+    <div class="patient-list">
+        <!-- Pacientes se generan dinámicamente -->
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Datos de pacientes
             const patients = [
-                {id: '00000001', name: 'Luis Pérez', apellidoPaterno: 'Pérez', apellidoMaterno: 'Gómez', fechaNacimiento: '1980-01-01', edad: 44, sexo: 'Masculino', actividad: 'Ingeniero', estadoCivil: 'Soltero', telefonoFijo: '123456789', telefonoMovil: '987654321', email: 'luis.perez@example.com', direccion: 'Calle Falsa 123', comuna: 'Comuna 1', ciudad: 'Ciudad 1', pais: 'Chile'},
-                {id: '00000002', name: 'Laura González', apellidoPaterno: 'González', apellidoMaterno: 'Rodríguez', fechaNacimiento: '1990-02-02', edad: 34, sexo: 'Femenino', actividad: 'Doctora', estadoCivil: 'Casada', telefonoFijo: '123456789', telefonoMovil: '987654321', email: 'laura.gonzalez@example.com', direccion: 'Calle Falsa 123', comuna: 'Comuna 2', ciudad: 'Ciudad 2', pais: 'Chile'},
-                // Añadir 141 pacientes adicionales aquí...
+                {id: '00000001', name: 'Luis', apellidoPaterno: 'Pérez', apellidoMaterno: 'Gómez'},
+                {id: '00000002', name: 'Laura', apellidoPaterno: 'González', apellidoMaterno: 'Rodríguez'},
+                // Añadir los pacientes restantes aquí...
+                {id: '00000003', name: 'Carlos', apellidoPaterno: 'Martínez', apellidoMaterno: 'Soto'},
+                {id: '00000004', name: 'Ana', apellidoPaterno: 'López', apellidoMaterno: 'Ramírez'},
+                {id: '00000005', name: 'José', apellidoPaterno: 'Hernández', apellidoMaterno: 'Vargas'},
+                {id: '00000006', name: 'María', apellidoPaterno: 'Díaz', apellidoMaterno: 'Castillo'},
+                {id: '00000007', name: 'Juan', apellidoPaterno: 'Silva', apellidoMaterno: 'Fuentes'},
+                {id: '00000008', name: 'Carmen', apellidoPaterno: 'Rojas', apellidoMaterno: 'Morales'},
+                {id: '00000009', name: 'Pedro', apellidoPaterno: 'Torres', apellidoMaterno: 'Espinoza'},
+                {id: '00000010', name: 'Rosa', apellidoPaterno: 'Gutiérrez', apellidoMaterno: 'Carrasco'},
+                {id: '00000011', name: 'Felipe', apellidoPaterno: 'Vega', apellidoMaterno: 'Saavedra'},
+                {id: '00000012', name: 'Antonia', apellidoPaterno: 'Navarro', apellidoMaterno: 'Campos'},
+                {id: '00000013', name: 'Mario', apellidoPaterno: 'Araya', apellidoMaterno: 'Reyes'},
+                {id: '00000014', name: 'Isabel', apellidoPaterno: 'Bravo', apellidoMaterno: 'Salinas'},
+                {id: '00000015', name: 'Ricardo', apellidoPaterno: 'Pizarro', apellidoMaterno: 'Figueroa'},
+                {id: '00000016', name: 'Beatriz', apellidoPaterno: 'Cárdenas', apellidoMaterno: 'Molina'},
+                {id: '00000017', name: 'Gonzalo', apellidoPaterno: 'Muñoz', apellidoMaterno: 'Orellana'},
+                {id: '00000018', name: 'Elena', apellidoPaterno: 'Sánchez', apellidoMaterno: 'Tapia'},
+                {id: '00000019', name: 'Francisco', apellidoPaterno: 'Vargas', apellidoMaterno: 'Cruz'},
+                {id: '00000020', name: 'Teresa', apellidoPaterno: 'Ortega', apellidoMaterno: 'Miranda'},
+                {id: '00000021', name: 'Martín', apellidoPaterno: 'Moreno', apellidoMaterno: 'Garrido'},
+                {id: '00000022', name: 'Claudia', apellidoPaterno: 'Espinoza', apellidoMaterno: 'Navarrete'},
+                {id: '00000023', name: 'Fernando', apellidoPaterno: 'Ruiz', apellidoMaterno: 'Ríos'},
+                {id: '00000024', name: 'Mónica', apellidoPaterno: 'Palma', apellidoMaterno: 'Fierro'},
+                {id: '00000025', name: 'Patricio', apellidoPaterno: 'Peña', apellidoMaterno: 'Aguirre'},
+                {id: '00000026', name: 'Daniela', apellidoPaterno: 'Castro', apellidoMaterno: 'Sanhueza'},
+                {id: '00000027', name: 'Rodrigo', apellidoPaterno: 'Riquelme', apellidoMaterno: 'Pino'},
+                {id: '00000028', name: 'Alejandra', apellidoPaterno: 'Olivares', apellidoMaterno: 'Cabrera'},
+                {id: '00000029', name: 'Miguel', apellidoPaterno: 'Maldonado', apellidoMaterno: 'Herrera'},
+                {id: '00000030', name: 'Gloria', apellidoPaterno: 'Soto', apellidoMaterno: 'Ríos'},
+                // Pacientes adicionales...
+                {id: '00000131', name: 'Cecilia', apellidoPaterno: 'Reyes', apellidoMaterno: 'Jiménez'},
+                {id: '00000132', name: 'Jorge', apellidoPaterno: 'Flores', apellidoMaterno: 'Sáez'},
+                {id: '00000133', name: 'Verónica', apellidoPaterno: 'Ortiz', apellidoMaterno: 'Salazar'},
+                {id: '00000134', name: 'Diego', apellidoPaterno: 'Yáñez', apellidoMaterno: 'Gálvez'},
+                {id: '00000135', name: 'Pamela', apellidoPaterno: 'Godoy', apellidoMaterno: 'Escobar'},
+                {id: '00000136', name: 'Claudio', apellidoPaterno: 'Ramos', apellidoMaterno: 'Leiva'},
+                {id: '00000137', name: 'Andrea', apellidoPaterno: 'Alarcón', apellidoMaterno: 'Cáceres'},
+                {id: '00000138', name: 'Sebastián', apellidoPaterno: 'Valdés', apellidoMaterno: 'Aravena'},
+                {id: '00000139', name: 'Paulina', apellidoPaterno: 'Escobar', apellidoMaterno: 'Meza'},
+                {id: '00000140', name: 'Cristian', apellidoPaterno: 'Zúñiga', apellidoMaterno: 'San Martín'},
+                {id: '00000141', name: 'Carolina', apellidoPaterno: 'Navarrete', apellidoMaterno: 'Montenegro'},
+                {id: '00000142', name: 'Javiera', apellidoPaterno: 'Bustamante', apellidoMaterno: 'Cortés'},
+                {id: '00000143', name: 'Tomás', apellidoPaterno: 'Medina', apellidoMaterno: 'Vidal'},
             ];
+
+            for (let i = 31; i <= 143; i++) {
+                patients.push({
+                    id: String(i).padStart(8, '0'),
+                    name: `Paciente${i}`,
+                    apellidoPaterno: `ApellidoP${i}`,
+                    apellidoMaterno: `ApellidoM${i}`
+                });
+            }
 
             // Guardar datos de pacientes en localStorage
             localStorage.setItem('patients', JSON.stringify(patients));
@@ -89,7 +159,7 @@
                     <a href="submenu_paciente.html?id=${patient.id}">
                         <img src="Imagenes/Perfil.png" alt="${patient.name}">
                     </a>
-                    <p>${patient.name} (ID: ${patient.id})</p>
+                    <p>${patient.name} ${patient.apellidoPaterno} ${patient.apellidoMaterno} (ID: ${patient.id})</p>
                 `;
                 patientList.appendChild(patientDiv);
             });
@@ -99,7 +169,7 @@
                 const query = event.target.value.toLowerCase();
                 document.querySelectorAll('.patient').forEach(patientDiv => {
                     const name = patientDiv.querySelector('p').textContent.toLowerCase();
-                    if (name.startsWith(query)) {
+                    if (name.includes(query)) {
                         patientDiv.style.display = '';
                     } else {
                         patientDiv.style.display = 'none';
@@ -108,70 +178,5 @@
             });
         });
     </script>
-</head>
-<body>
-    <h1>Lista de Pacientes</h1>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Buscar por nombre o ID de paciente">
-    </div>
-    <div class="add-patient">
-        <a href="3.1Agregar.html" class="add-button">
-            <span>+</span> Agregar Paciente
-        </a>
-    </div>
-    <div class="patient-list">
-        <!-- Generar 36 pacientes de ejemplo -->
-        <script>
-            const patients = [
-                {id: '00000001', name: 'Luis Pérez'},
-                {id: '00000002', name: 'Laura González'},
-                {id: '00000003', name: 'Lucía López'},
-                {id: '00000004', name: 'Lorena Rodríguez'},
-                {id: '00000005', name: 'Luz Fernández'},
-                {id: '00000006', name: 'Luis Martínez'},
-                {id: '00000007', name: 'Lorena Sánchez'},
-                {id: '00000008', name: 'Laura Ramírez'},
-                {id: '00000009', name: 'Lucas Torres'},
-                {id: '00000010', name: 'Lidia Reyes'},
-                {id: '00000011', name: 'Leonardo Castro'},
-                {id: '00000012', name: 'Luisa Ruiz'},
-                {id: '00000013', name: 'Lorenzo Rojas'},
-                {id: '00000014', name: 'Luciana Vega'},
-                {id: '00000015', name: 'Linda Medina'},
-                {id: '00000016', name: 'Laura Ortega'},
-                {id: '00000017', name: 'Lorenzo Gil'},
-                {id: '00000018', name: 'Luna Navarro'},
-                {id: '00000019', name: 'Lino Mora'},
-                {id: '00000020', name: 'Lourdes Soto'},
-                {id: '00000021', name: 'León Jiménez'},
-                {id: '00000022', name: 'Lidia Fuentes'},
-                {id: '00000023', name: 'Lázaro Cabrera'},
-                {id: '00000024', name: 'Liliana Paredes'},
-                {id: '00000025', name: 'Lucho Miranda'},
-                {id: '00000026', name: 'Leila Campos'},
-                {id: '00000027', name: 'Lorenzo Peña'},
-                {id: '00000028', name: 'Laura Herrera'},
-                {id: '00000029', name: 'Luciano Ramos'},
-                {id: '00000030', name: 'Lía Ortiz'},
-                {id: '00000031', name: 'Lionel Vargas'},
-                {id: '00000032', name: 'Liliana Luna'},
-                {id: '00000033', name: 'Lisandro Morales'},
-                {id: '00000034', name: 'Luz Cabrera'},
-                {id: '00000035', name: 'Lucas Bautista'},
-                {id: '00000036', name: 'Lourdes Castillo'}
-            ];
-
-            for (let patient of patients) {
-                document.write(`
-                    <div class="patient" data-id="${patient.id}">
-                        <a href="submenu_paciente.html?id=${patient.id}">
-                            <img src="Imagenes/Perfil.png" alt="${patient.name}">
-                        </a>
-                        <p>${patient.name} (ID: ${patient.id})</p>
-                    </div>
-                `);
-            }
-        </script>
-    </div>
 </body>
 </html>
