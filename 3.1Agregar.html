@@ -1,167 +1,141 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pacientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar - Pacientes</title>
+    <link rel="stylesheet" href="agregarpaciente.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .search-container input {
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .add-patient {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .add-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .add-button span {
-            font-size: 20px;
-            margin-right: 5px;
-        }
-        .patient-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .patient {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            text-align: center;
-            width: 150px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .patient img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
-        .patient p {
-            margin: 10px 0;
-            color: #555;
-        }
         .back-link {
-            color: black;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .back-link:hover {
+            color: #555;
         }
     </style>
 </head>
-<body>
-    <a href="2.index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
-    <h1>Lista de Pacientes</h1>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Buscar por nombre o ID de paciente">
+<body class="dark_mode">
+
+    <div class="container">
+        <h2>Agregar Paciente</h2>
+        <form action="#" method="POST" id="patientForm">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA" required>
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <label for="telefono">Número de teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="direccion">Dirección:</label>
+            <textarea id="direccion" name="direccion" required></textarea>
+
+            <label for="tipoDocumento">Tipo de Documento:</label>
+            <select id="tipoDocumento" name="tipoDocumento" required>
+                <option value="RUT">RUT</option>
+                <option value="pasaporte">Pasaporte</option>
+            </select>
+
+            <label for="numeroDocumento">Número de Documento:</label>
+            <input type="text" id="numeroDocumento" name="numeroDocumento" required>
+
+            <label for="sistemaSalud">Sistema de salud:</label>
+            <select id="sistemaSalud" name="sistemaSalud" required>
+                <option value="FONASA">FONASA</option>
+                <option value="ISAPRE">ISAPRE</option>
+            </select>
+
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias"></textarea>
+
+            <label for="historialMedico">Historial médico:</label>
+            <textarea id="historialMedico" name="historialMedico"></textarea>
+
+            <label for="tipoCancer">Tipo de cáncer:</label>
+            <input type="text" id="tipoCancer" name="tipoCancer">
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="estadoCivil">Estado Civil:</label>
+            <select id="estadoCivil" name="estadoCivil" required>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="viudo">Viudo</option>
+                <option value="divorciado">Divorciado</option>
+            </select>
+
+            <label for="idAdicional">ID de Adición del Paciente:</label>
+            <input type="text" id="idAdicional" name="idAdicional">
+
+            <label for="fechaIngreso">Fecha y Hora de Ingreso:</label>
+            <input type="datetime-local" id="fechaIngreso" name="fechaIngreso" required>
+
+            <label for="notasAdicionales">Notas adicionales:</label>
+            <textarea id="notasAdicionales" name="notasAdicionales"></textarea>
+
+            <input type="submit" value="Guardar">
+        </form>
     </div>
-    <div class="add-patient">
-        <a href="3.1Agregar.html" class="add-button">
-            <span>+</span> Agregar Paciente
-        </a>
-    </div>
-    <div class="patient-list">
-        <!-- Pacientes se generan dinámicamente -->
-    </div>
+
+    <a href="3.Pacientes.html" class="back-link">&#8592; Volver al inicio</a>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const patients = [
-                {id: '00000001', name: 'Luis', apellidoPaterno: 'Pérez', apellidoMaterno: 'Gómez'},
-                {id: '00000002', name: 'Laura', apellidoPaterno: 'González', apellidoMaterno: 'Rodríguez'},
-                {id: '00000003', name: 'Carlos', apellidoPaterno: 'Martínez', apellidoMaterno: 'Soto'},
-                {id: '00000004', name: 'Ana', apellidoPaterno: 'López', apellidoMaterno: 'Ramírez'},
-                {id: '00000005', name: 'José', apellidoPaterno: 'Hernández', apellidoMaterno: 'Vargas'},
-                {id: '00000006', name: 'María', apellidoPaterno: 'Díaz', apellidoMaterno: 'Castillo'},
-                {id: '00000007', name: 'Juan', apellidoPaterno: 'Silva', apellidoMaterno: 'Fuentes'},
-                {id: '00000008', name: 'Carmen', apellidoPaterno: 'Rojas', apellidoMaterno: 'Morales'},
-                {id: '00000009', name: 'Pedro', apellidoPaterno: 'Torres', apellidoMaterno: 'Espinoza'},
-                {id: '00000010', name: 'Rosa', apellidoPaterno: 'Gutiérrez', apellidoMaterno: 'Carrasco'},
-                {id: '00000011', name: 'Felipe', apellidoPaterno: 'Vega', apellidoMaterno: 'Saavedra'},
-                {id: '00000012', name: 'Antonia', apellidoPaterno: 'Navarro', apellidoMaterno: 'Campos'},
-                {id: '00000013', name: 'Mario', apellidoPaterno: 'Araya', apellidoMaterno: 'Reyes'},
-                {id: '00000014', name: 'Isabel', apellidoPaterno: 'Bravo', apellidoMaterno: 'Salinas'},
-                {id: '00000015', name: 'Ricardo', apellidoPaterno: 'Pizarro', apellidoMaterno: 'Figueroa'},
-                {id: '00000016', name: 'Beatriz', apellidoPaterno: 'Cárdenas', apellidoMaterno: 'Molina'},
-                {id: '00000017', name: 'Gonzalo', apellidoPaterno: 'Muñoz', apellidoMaterno: 'Orellana'},
-                {id: '00000018', name: 'Elena', apellidoPaterno: 'Sánchez', apellidoMaterno: 'Tapia'},
-                {id: '00000019', name: 'Francisco', apellidoPaterno: 'Vargas', apellidoMaterno: 'Cruz'},
-                {id: '00000020', name: 'Teresa', apellidoPaterno: 'Ortega', apellidoMaterno: 'Miranda'},
-                {id: '00000021', name: 'Martín', apellidoPaterno: 'Moreno', apellidoMaterno: 'Garrido'},
-                {id: '00000022', name: 'Claudia', apellidoPaterno: 'Espinoza', apellidoMaterno: 'Navarrete'},
-                {id: '00000023', name: 'Fernando', apellidoPaterno: 'Ruiz', apellidoMaterno: 'Ríos'},
-                {id: '00000024', name: 'Mónica', apellidoPaterno: 'Palma', apellidoMaterno: 'Fierro'},
-                {id: '00000025', name: 'Patricio', apellidoPaterno: 'Peña', apellidoMaterno: 'Aguirre'},
-                {id: '00000026', name: 'Daniela', apellidoPaterno: 'Castro', apellidoMaterno: 'Sanhueza'},
-                {id: '00000027', name: 'Rodrigo', apellidoPaterno: 'Riquelme', apellidoMaterno: 'Pino'},
-                {id: '00000028', name: 'Alejandra', apellidoPaterno: 'Olivares', apellidoMaterno: 'Cabrera'},
-                {id: '00000029', name: 'Miguel', apellidoPaterno: 'Maldonado', apellidoMaterno: 'Herrera'},
-                {id: '00000030', name: 'Gloria', apellidoPaterno: 'Soto', apellidoMaterno: 'Ríos'},
-                {id: '00000131', name: 'Cecilia', apellidoPaterno: 'Reyes', apellidoMaterno: 'Jiménez'},
-                {id: '00000132', name: 'Jorge', apellidoPaterno: 'Flores', apellidoMaterno: 'Sáez'},
-                {id: '00000133', name: 'Verónica', apellidoPaterno: 'Ortiz', apellidoMaterno: 'Salazar'},
-                {id: '00000134', name: 'Diego', apellidoPaterno: 'Yáñez', apellidoMaterno: 'Gálvez'},
-                {id: '00000135', name: 'Pamela', apellidoPaterno: 'Godoy', apellidoMaterno: 'Escobar'},
-                {id: '00000136', name: 'Claudio', apellidoPaterno: 'Ramos', apellidoMaterno: 'Leiva'},
-                {id: '00000137', name: 'Andrea', apellidoPaterno: 'Alarcón', apellidoMaterno: 'Cáceres'},
-                {id: '00000138', name: 'Sebastián', apellidoPaterno: 'Valdés', apellidoMaterno: 'Aravena'},
-                {id: '00000139', name: 'Paulina', apellidoPaterno: 'Escobar', apellidoMaterno: 'Meza'},
-                {id: '00000140', name: 'Cristian', apellidoPaterno: 'Zúñiga', apellidoMaterno: 'San Martín'},
-                {id: '00000141', name: 'Carolina', apellidoPaterno: 'Navarrete', apellidoMaterno: 'Montenegro'},
-                {id: '00000142', name: 'Javiera', apellidoPaterno: 'Bustamante', apellidoMaterno: 'Cortés'},
-                {id: '00000143', name: 'Tomás', apellidoPaterno: 'Medina', apellidoMaterno: 'Vidal'}
-            ];
 
-            localStorage.setItem('patients', JSON.stringify(patients));
+        document.addEventListener('DOMContentLoaded', function() {
+            var fontSize = localStorage.getItem('fontSize');
+            var theme = localStorage.getItem('theme');
+            var language = localStorage.getItem('language');
 
-            const patientList = document.querySelector('.patient-list');
-            patients.forEach(patient => {
-                const patientDiv = document.createElement('div');
-                patientDiv.className = 'patient';
-                patientDiv.dataset.id = patient.id;
-                patientDiv.innerHTML = `
-                    <a href="submenu_paciente.html?id=${patient.id}">
-                        <img src="Imagenes/Perfil.png" alt="${patient.name}">
-                    </a>
-                    <p>${patient.name} ${patient.apellidoPaterno} ${patient.apellidoMaterno} (ID: ${patient.id})</p>
-                `;
-                patientList.appendChild(patientDiv);
-            });
+            if (fontSize) {
+                applyFontSize(fontSize);
+            }
 
-            document.getElementById('search-input').addEventListener('keyup', (event) => {
-                const query = event.target.value.toLowerCase();
-                document.querySelectorAll('.patient').forEach(patientDiv => {
-                    const name = patientDiv.querySelector('p').textContent.toLowerCase();
-                    if (name.includes(query)) {
-                        patientDiv.style.display = '';
-                    } else {
-                        patientDiv.style.display = 'none';
-                    }
-                });
-            });
+            if (theme) {
+                applyTheme(theme);
+            }
+
+            if (language) {
+                applyLanguage(language);
+            }
         });
+
+        function applyFontSize(size) {
+            document.body.style.fontSize = size;
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.style.backgroundColor = '#333';
+                document.body.style.color = '#fff';
+            } else {
+                document.body.style.backgroundColor = '#f2f2f2';
+                document.body.style.color = '#000';
+            }
+        }
+
+        function applyLanguage(language) {
+            alert('Idioma cambiado a ' + language);
+        }
     </script>
+    <script src="configuraciones.js"></script>
+
 </body>
 </html>
