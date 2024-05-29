@@ -1,4 +1,3 @@
-// JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('modal');
     var daysContainer = document.getElementById('daysContainer');

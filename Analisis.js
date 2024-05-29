@@ -162,5 +162,4 @@ document.getElementById('chartType').addEventListener('change', () => {
     createChart(chartType);
 });
 
-// Mostrar tabla por defecto
 showDataAsTable();

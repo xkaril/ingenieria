@@ -150,10 +150,8 @@
                 });
             }
 
-            // Guardar datos de pacientes en localStorage
             localStorage.setItem('patients', JSON.stringify(patients));
 
-            // Mostrar pacientes en la página
             const patientList = document.querySelector('.patient-list');
             patients.forEach(patient => {
                 const patientDiv = document.createElement('div');
@@ -168,7 +166,6 @@
                 patientList.appendChild(patientDiv);
             });
 
-            // Búsqueda de pacientes
             document.getElementById('search-input').addEventListener('keyup', (event) => {
                 const query = event.target.value.toLowerCase();
                 document.querySelectorAll('.patient').forEach(patientDiv => {

@@ -18,7 +18,7 @@
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
-            position: relative; /* Permite posicionar el enlace */
+            position: relative; 
         }
 
         .header-content {
@@ -35,9 +35,9 @@
         a {
             text-decoration: none;
             color: black;
-            position: absolute; /* Posiciona el enlace */
-            top: 20px; /* Alinea con el borde superior del encabezado */
-            left: 20px; /* Alinea con el borde izquierdo del encabezado */
+            position: absolute; 
+            top: 20px; 
+            left: 20px;
         }
 
         main {
@@ -163,11 +163,9 @@
             }
         ];
 
-        // Función para predecir el riesgo de enfermedades genéticas
         function predictGeneticRisk(selectedDisease) {
             const disease = diseases.find(disease => disease.name === selectedDisease);
             if (disease) {
-                // Supongamos que la probabilidad de riesgo es un valor aleatorio entre 0 y 1
                 return Math.random().toFixed(2);
             } else {
                 console.error('La enfermedad seleccionada no tiene factores de riesgo definidos.');
@@ -175,7 +173,6 @@
             }
         }
 
-        // Evento para manejar la solicitud de predicción de riesgo
         document.getElementById('predictRiskBtn').addEventListener('click', function() {
             const selectedDisease = document.getElementById('diseaseSelect').value;
             if (selectedDisease) {

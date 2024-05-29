@@ -127,31 +127,24 @@
                 <p>Descripción de la enfermedad 2.</p>
                 <button class="simulation-button" onclick="simularTratamiento('Enfermedad 2')">Simular Tratamiento</button>
             </div>
-            <!-- Agrega más enfermedades aquí según sea necesario -->
         </div>
     </div>
 
     <div id="tratamientos-container" class="container"></div>
 
     <script>
-        // Variable para almacenar los tratamientos
         let tratamientosActuales = [];
 
-        // Función para simular un tratamiento para una enfermedad específica
         function simularTratamiento(enfermedad) {
-            // Generar los tratamientos para la enfermedad
             let nuevosTratamientos = generarTratamientos(enfermedad);
             if (nuevosTratamientos && nuevosTratamientos.length > 0) {
-                // Actualizar los tratamientos actuales
                 tratamientosActuales = nuevosTratamientos;
-                // Mostrar los tratamientos en la página
                 mostrarTratamientos();
             } else {
                 alert(`No se encontraron tratamientos para ${enfermedad}.`);
             }
         }
 
-        // Función para generar tratamientos simulados para una enfermedad específica
         function generarTratamientos(enfermedad) {
             switch (enfermedad) {
                 case 'Enfermedad 1':
@@ -171,13 +164,9 @@
             }
         }
 
-        // Función para mostrar los tratamientos en la página
         function mostrarTratamientos() {
-            // Obtener el contenedor de tratamientos
             const tratamientosContainer = document.getElementById('tratamientos-container');
-            // Limpiar cualquier tratamiento anterior
             tratamientosContainer.innerHTML = '';
-            // Iterar sobre los tratamientos actuales y agregarlos al contenedor
             tratamientosActuales.forEach(tratamiento => {
                 const tratamientoDiv = document.createElement('div');
                 tratamientoDiv.classList.add('tratamiento');

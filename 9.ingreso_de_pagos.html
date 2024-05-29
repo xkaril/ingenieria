@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Pagos Médicos</title>
     <style>
-        /* Estilos CSS */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -118,7 +117,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
     <script>
-        // Datos de compras
         let bonoData = [
             { tipo: "PAD", fecha: "2024-05-16 10:30:00", precio: 15000, montoTotal: 15000 },
             { tipo: "Fonasa", fecha: "2024-05-15 14:45:00", precio: 10000, montoTotal: 10000 },
@@ -133,13 +131,11 @@
             { medicamento: "Etopósido", fecha: "2024-05-12 15:30:00", precio: 6000, cantidad: 1, montoTotal: 6000 }
         ];
 
-        // Función para mostrar las compras
         function mostrarCompras() {
             mostrarComprasBono();
             mostrarComprasMedicamento();
         }
 
-        // Función para mostrar las compras de bonos en una tabla
         function mostrarComprasBono() {
             const bonoTableContainer = document.getElementById('bono-table-container');
             bonoTableContainer.innerHTML = '';
@@ -159,7 +155,6 @@
             bonoTableContainer.appendChild(table);
         }
 
-        // Función para mostrar las compras de medicamentos en una tabla
         function mostrarComprasMedicamento() {
             const medicamentoTableContainer = document.getElementById('medicamento-table-container');
             medicamentoTableContainer.innerHTML = '';
@@ -179,7 +174,6 @@
             medicamentoTableContainer.appendChild(table);
         }
 
-        // Función para exportar los datos a PDF
         function exportToPDF() {
             const doc = new jsPDF();
             doc.text("Compras de Bonos", 10, 10);
@@ -189,7 +183,6 @@
             doc.save("compras.pdf");
         }
 
-        // Función para exportar los datos a Excel
         function exportToExcel() {
             const workbook = new ExcelJS.Workbook();
             const bonoSheet = workbook.addWorksheet('Compras de Bonos');
@@ -226,7 +219,6 @@
             });
         }
 
-        // Mostrar las compras al cargar la página
         mostrarCompras();
     </script>
 </body>

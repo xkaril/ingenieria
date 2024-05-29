@@ -243,7 +243,6 @@
     </div>
 
     <div class="content">
-        <!-- Datos Personales -->
         <div id="datos-personales" class="section hidden">
             <div class="form-container">
                 <h1>Datos Personales</h1>
@@ -266,7 +265,6 @@
             </div>
         </div>
 
-        <!-- Antecedentes Clínicos -->
         <div id="antecedentes-clinicos" class="section hidden">
             <div class="form-container">
                 <h1>Antecedentes Clínicos</h1>
@@ -286,7 +284,6 @@
             </div>
         </div>
 
-        <!-- Contactos -->
         <div id="contactos" class="section hidden">
             <div class="form-container">
                 <h1>Contactos</h1>
@@ -305,7 +302,6 @@
             </div>
         </div>
 
-        <!-- Enfermedades -->
         <div id="enfermedades" class="section hidden">
             <div class="container">
                 <a href="profile.html" class="back-link">&lt; Volver a perfil</a>
@@ -320,12 +316,10 @@
                         <p>Descripción breve de la enfermedad 2.</p>
                         <button class="simulation-button">Simular Tratamiento</button>
                     </div>
-                    <!-- Agregar más enfermedades según sea necesario -->
                 </div>
             </div>
         </div>
 
-        <!-- Seguimiento -->
         <div id="seguimiento" class="section hidden">
             <div class="form-container">
                 <h1>Seguimiento del Tratamiento</h1>
@@ -351,17 +345,13 @@
     </div>
 
     <script>
-        // Función para mostrar la sección seleccionada
         function showSection(sectionId) {
-            // Ocultar todas las secciones
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => section.classList.add('hidden'));
 
-            // Mostrar la sección seleccionada
             const selectedSection = document.getElementById(sectionId);
             selectedSection.classList.remove('hidden');
 
-            // Mostrar/ocultar la sección de visualización en seguimiento
             const visualizationSection = document.querySelector('.vizualizacion');
             if (sectionId === 'seguimiento') {
                 visualizationSection.classList.remove('hidden');
@@ -370,7 +360,6 @@
             }
         }
 
-        // Datos de ejemplo
         const patientData = {
             nombre: "Juan Pérez",
             id: "12345",
@@ -383,7 +372,6 @@
             diagnostico: "Diagnóstico detallado del paciente."
         };
 
-        // Función para llenar los datos del paciente en los formularios
         function fillPatientData() {
             document.getElementById("nombre").value = patientData.nombre;
             document.getElementById("id").value = patientData.id;
@@ -396,10 +384,8 @@
             document.getElementById("diagnostico").value = patientData.diagnostico;
         }
 
-        // Llamar a la función para llenar los datos al cargar la página
         window.onload = fillPatientData;
 
-        // Función de visualización de datos (ejemplo)
         function visualizeData() {
             const date = document.getElementById('visualization-date').value;
             alert('Mostrando datos para la fecha: ' + date);
